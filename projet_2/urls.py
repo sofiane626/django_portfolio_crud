@@ -39,7 +39,7 @@ urlpatterns = [
     path('services/', services, name='services'),
     path('services/destroy/<int:id>', destroy_Services),
     path('services/edit/<int:id>', updateServices),
-    path('create/services/', createServices, name='create_Testimonials'),
+    path('create/services/', createServices, name='create_Services'),
     path('testimonials/', testimonials, name='Testimonials'),
     path('testimonials/destroy/<int:id>', destroy_Testimonials),
     path('testimonials/edit/<int:id>', updateTestimonials),
