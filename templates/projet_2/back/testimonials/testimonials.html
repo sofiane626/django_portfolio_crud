@@ -1,0 +1,51 @@
+{% extends 'projet_2/base.html' %} {% block content %}
+<main id="main">
+  <section id="testimonials" class="testimonials section-bg">
+    <div class="container">
+      <div
+        class="testimonials-slider swiper"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <div class="swiper-wrapper">
+          {% for Testimonials in testimonials %}
+          <div class="swiper-slide">
+            <div class="testimonial-item" data-aos="fade-up">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                {{Testimonials.citation}}
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              class="testimonial-img" alt="">
+              <h3>{{Testimonials.nom}}</h3>
+              <h4>{{Testimonials.job}}</h4>
+              <div class="d-flex gap-5">
+                <form
+                  action="/testimonials/destroy/{{ Testimonials.id }}"
+                  method="POST"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-danger fs-8">
+                    Delete
+                  </button>
+                </form>
+                <a
+                  href="/testimonials/edit/{{ Testimonials.id }}"
+                  class="btn btn-outline-primary fs-8"
+                  style="width: 100px"
+                  >Edit</a
+                >
+              </div>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+          <a href={% url "create_Testimonials" %} class="btn btn-outline-warning fs-5 ml-8 mt-5">Create Testimonials</a>
+    
+    </div>
+  </section>
+</main>
+{% endblock content %}

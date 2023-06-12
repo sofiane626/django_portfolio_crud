@@ -1,0 +1,64 @@
+{% extends 'projet_2/base.html' %} {% block content %}
+<main id="main">
+  <section id="portfolio" class="portfolio section-bg">
+    <div class="container">
+      <div class="section-title">
+        <h2>Portfolio</h2>
+      </div>
+      
+      <div class="row" data-aos="fade-up">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            {% for PortfolioFiltre in portfolioFiltre %}
+            <li data-filter=".filter-{{PortfolioFiltre.filtre}}">
+              {{PortfolioFiltre.filtre}}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      
+      <div
+        class="row portfolio-container"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {% for Portfolio in portfolio %}
+        
+        <div
+          class="col-lg-4 col-md-6 portfolio-item filter-{{Portfolio.choixFiltre}}"
+        >
+          <div class="portfolio-wrap">
+            <img
+              src="/static/assets/img/portfolio/{{ Portfolio.img }}"
+              class="img-fluid"
+              alt=""
+            />
+            <div class="portfolio-links gap-5">
+              <form
+                action="/Portfolio/destroy/{{ Portfolio.id }}"
+                method="POST"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger fs-8">
+                  Delete
+                </button>
+              </form>
+              <a
+                href="/portfolio/edit/{{ Portfolio.id }}"
+                class="btn btn-outline-primary fs-5"
+                style="width: 100px; height: 40px"
+                >Edit</a
+              >
+            </div>
+          </div>
+        </div>
+        
+        {% endfor %}
+      </div>
+            <a href={% url "create_Portfolio" %} class="btn btn-outline-warning fs-5 ml-8 mt-5">Create Portfolio</a>
+    </div>
+  </section>
+</main>
+{% endblock content %}

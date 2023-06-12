@@ -1,0 +1,45 @@
+{% extends 'projet_2/base.html' %} {% block content %}
+<main id="main">
+  <section id="skills" class="skills section-bg">
+    <div class="container">
+      <div class="row skills-content gap-2">
+        {% for Skills_bar in skills_bar %}
+        <div class="col-lg-6" data-aos="fade-up">
+          <div class="progress">
+            <span class="skill"
+              >{{ Skills_bar.texte_progression }}
+              <i class="val">{{ Skills_bar.progression }}%</i></span
+            >
+            <div class="progress-bar-wrap">
+              <div
+                class="progress-bar"
+                role="progressbar"
+                aria-valuenow="{{ Skills_bar.progression }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex gap-5">
+          <form action="/skills_bar/destroy/{{ Skills_bar.id }}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger fs-8">
+              Delete
+            </button>
+          </form>
+          <a
+            href="/skills_bar/edit/{{ Skills_bar.id }}"
+            class="btn btn-outline-primary fs-8"
+            style="width: 100px"
+            >Edit</a
+          >
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+          <a href={% url "create_Skills_bar" %} class="btn btn-outline-warning fs-5 ml-8 mt-5">Create Skill</a>
+  
+  </section>
+</main>
+{% endblock content %}

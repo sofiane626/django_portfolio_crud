@@ -1,0 +1,32 @@
+{% extends 'projet_2/base.html' %} {% block content %}
+<main id="main">
+  <section id="services" class="services">
+    <div class="container">
+      <div class="row">
+        {% for Services in services %}
+        <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
+          <div class="icon"><i class="bi {{Services.logo}}"></i></div>
+          <h4 class="title"><a href="">{{Services.titre}}</a></h4>
+          <p class="description">{{Services.contenu}}</p>
+          <div class="d-flex gap-5">
+            <form action="/services/destroy/{{ Services.id }}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger fs-8">
+                Delete
+              </button>
+            </form>
+            <a
+              href="/services/edit/{{ Services.id }}"
+              class="btn btn-outline-primary fs-8"
+              style="width: 100px"
+              >Edit</a
+            >
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <a href={% url "create_Services" %} class="btn btn-outline-warning fs-5 ml-8 mt-5">Create Services</a>
+  </section>
+</main>
+{% endblock content %}

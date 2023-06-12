@@ -1,0 +1,13 @@
+{% extends 'projet_2/base.html' %}
+
+{% block content %}
+<main id="main">
+  <h1>La page edit Services</h1>
+  <div class="mounir-box">
+    <form class="mounir" method="POST">
+      {% csrf_token %} {{ form }}
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</main>
+{% endblock content %}
